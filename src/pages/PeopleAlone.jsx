@@ -70,7 +70,7 @@ function PeopleAlone() {
                     <ListGroup>
                         {people.films.map((link, index) => (
                             <ListGroup.Item key={index + 1}>
-                                <a href={`http://localhost:3000/films/${getIdFromUrl(link)}`}>
+                                <a href={`/films/${getIdFromUrl(link)}`}>
                                     Film {getIdFromUrl(link)} →
                                 </a>
                             </ListGroup.Item>
@@ -80,7 +80,7 @@ function PeopleAlone() {
             </Row>
             <Row>
                 <Col sm={3}>
-                    <Button variant="secondary" href={'http://localhost:3000/people'}>← Back</Button>
+                    <Button variant="secondary" href={'/people'}>← Back</Button>
                 </Col>
             </Row>
         </Card.Body>

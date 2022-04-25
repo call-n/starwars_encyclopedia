@@ -58,7 +58,7 @@ function Film() {
                     <ListGroup>
                         {film.characters.map((link, index) => (
                             <ListGroup.Item key={index + 1}>
-                                <a href={`http://localhost:3000/people/${getIdFromUrl(link)}`}>
+                                <a href={`/people/${getIdFromUrl(link)}`}>
                                     Character {getIdFromUrl(link)} →
                                 </a>
                             </ListGroup.Item>
@@ -68,7 +68,7 @@ function Film() {
             </Row>
             <Row>
                 <Col sm={3}>
-                    <Button variant="secondary" href={'http://localhost:3000/films'}>← Back</Button>
+                    <Button variant="secondary" href={'/films'}>← Back</Button>
                 </Col>
             </Row>
         </Card.Body>

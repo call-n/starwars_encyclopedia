@@ -100,7 +100,7 @@ function People() {
                                         <ListGroup.Item>
 											<Button 
                                                 variant="primary" 
-                                                href={`http://localhost:3000/people/${getIdFromUrl(char.url)}`}
+                                                href={`/people/${getIdFromUrl(char.url)}`}
                                                 >
                                                     Read more →
                                             </Button>

@@ -48,7 +48,7 @@ function Films() {
 										<ListGroup.Item>
 											<Button 
 												variant="primary" 
-												href={`http://localhost:3000/films/${index + 1}`}
+												href={`/films/${index + 1}`}
 												>
 												Read more →
 											</Button>
