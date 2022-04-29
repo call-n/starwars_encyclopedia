@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState, useRef, useCallback } from 'react'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import ListGroup from 'react-bootstrap/ListGroup'
@@ -20,7 +20,7 @@ function People() {
     const query = searchParams.get('query')
 
 
-    const getThePeople = async (searchQuery, thePage) => {
+    const getThePeople = useCallback( async (searchQuery, thePage) => {
 		setLoading(true)
         setSearchResult(null)
 
@@ -34,7 +34,7 @@ function People() {
         setSearchResult(data)
         setPeople(data)
 		setLoading(false)
-	}
+	}, [page, searchInput, setSearchParams])
 
     const handleSubmit = async e => {
 		e.preventDefault()
@@ -58,7 +58,7 @@ function People() {
 
         setSearchInput(query)
 		getThePeople(query, page)
-	}, [query, page])
+	}, [query, page, getThePeople])
 
   return (
     <>
