@@ -5,6 +5,7 @@ import Card from 'react-bootstrap/Card'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import { getAll } from '../services/SwapiAPI'
+import { Link } from 'react-router-dom'
 
 function Films() {
     const [page, setPage] = useState(0)
@@ -46,12 +47,7 @@ function Films() {
 										<ListGroup.Item><b>Released</b> {film.release_date}</ListGroup.Item>
 										<ListGroup.Item>{film.characters.length} <b>Characters</b></ListGroup.Item>
 										<ListGroup.Item>
-											<Button 
-												variant="primary" 
-												href={`/films/${index + 1}`}
-												>
-												Read more →
-											</Button>
+											<Button as={Link} to={`/films/${index + 1}`} variant="primary">Read more →</Button>
 										</ListGroup.Item>
 									</ListGroup>
 								</Card>

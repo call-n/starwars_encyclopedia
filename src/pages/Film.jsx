@@ -6,6 +6,7 @@ import Row from 'react-bootstrap/Row'
 import Button from 'react-bootstrap/Button'
 import { useParams } from 'react-router-dom'
 import { specifics, getIdFromUrl } from '../services/SwapiAPI'
+import { Link } from 'react-router-dom'
 
 function Film() {
     const [film, setFilm] = useState()
@@ -58,9 +59,9 @@ function Film() {
                     <ListGroup>
                         {film.characters.map((link, index) => (
                             <ListGroup.Item key={index + 1}>
-                                <a href={`/people/${getIdFromUrl(link)}`}>
+                                <Link to={`/people/${getIdFromUrl(link)}`}>
                                     Character {getIdFromUrl(link)} →
-                                </a>
+                                </Link>
                             </ListGroup.Item>
                         ))}
                     </ListGroup>
@@ -68,7 +69,7 @@ function Film() {
             </Row>
             <Row>
                 <Col sm={3}>
-                    <Button variant="secondary" href={'/films'}>← Back</Button>
+                    <Button as={Link} to={"/films"} variant="secondary">← Back</Button>
                 </Col>
             </Row>
         </Card.Body>

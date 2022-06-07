@@ -6,6 +6,7 @@ import Row from 'react-bootstrap/Row'
 import Button from 'react-bootstrap/Button'
 import { useParams } from 'react-router-dom'
 import { specifics, getIdFromUrl } from '../services/SwapiAPI'
+import { Link } from 'react-router-dom'
 
 function PeopleAlone() {
     const [people, setPeople] = useState()
@@ -70,9 +71,9 @@ function PeopleAlone() {
                     <ListGroup>
                         {people.films.map((link, index) => (
                             <ListGroup.Item key={index + 1}>
-                                <a href={`/films/${getIdFromUrl(link)}`}>
+                                <Link to={`/films/${getIdFromUrl(link)}`}>
                                     Film {getIdFromUrl(link)} →
-                                </a>
+                                </Link>
                             </ListGroup.Item>
                         ))}
                     </ListGroup>
@@ -80,7 +81,7 @@ function PeopleAlone() {
             </Row>
             <Row>
                 <Col sm={3}>
-                    <Button variant="secondary" href={'/people'}>← Back</Button>
+                    <Button as={Link} to={"/people"} variant="secondary">← Back</Button>
                 </Col>
             </Row>
         </Card.Body>
