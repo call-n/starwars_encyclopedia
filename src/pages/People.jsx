@@ -5,8 +5,8 @@ import ListGroup from 'react-bootstrap/ListGroup'
 import Card from 'react-bootstrap/Card'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import { useSearchParams } from 'react-router-dom'
-import { search, getIdFromUrl } from '../services/SwapiAPI'
+import { useSearchParams, Link } from 'react-router-dom'
+import { search, getIdFromUrl, getAll } from '../services/SwapiAPI'
 
 function People() {
     const [page, setPage] = useState(1)
@@ -36,6 +36,17 @@ function People() {
 		setLoading(false)
 	}
 
+	const getAllThePeople = async (kind, page) => {
+		setLoading(true)
+
+		const data = await getAll(kind, page)
+
+		console.log(data);
+		setSearchResult(data)
+        setPeople(data)
+		setLoading(false)
+	}
+
     const handleSubmit = async e => {
 		e.preventDefault()
 
@@ -48,17 +59,21 @@ function People() {
 		setSearchParams({ query: searchInput})
 	}
 
-
     useEffect(() => {
         if (!query) {
 			setSearchInput('')
 			setSearchResult(null)
+			getAllThePeople('people', page)
 			return
 		}
 
         setSearchInput(query)
 		getThePeople(query, page)
 	}, [query, page])
+
+	useEffect(() => {
+		getAllThePeople('people')
+	}, [])
 
   return (
     <>
@@ -86,7 +101,7 @@ function People() {
 
 			{searchResult && (
 				<div className="search-result mt-4">
-                    <p>Showing {searchResult.nbHits} search results for {searchInput}...</p>
+                    <p>Showing {searchResult.nbHits} search results for {!searchInput ? 'all people' : searchInput}...</p>
 
                     <Row xs={1} md={3} className="g-4">
 						{people.results.map((char, index) => (
@@ -98,12 +113,7 @@ function People() {
 										<ListGroup.Item><b>Born</b> {char.birth_year}</ListGroup.Item>
 										<ListGroup.Item><b>In</b> {char.films.length} films</ListGroup.Item>
                                         <ListGroup.Item>
-											<Button 
-                                                variant="primary" 
-                                                href={`/people/${getIdFromUrl(char.url)}`}
-                                                >
-                                                    Read more →
-                                            </Button>
+											<Button as={Link} to={`/people/${getIdFromUrl(char.url)}`} variant="primary">Read more →</Button>
 										</ListGroup.Item>
                                     </ListGroup>
                                 </Card>
